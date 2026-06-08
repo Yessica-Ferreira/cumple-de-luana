@@ -1,14 +1,6 @@
 /**
  * script.js — Invitación Kawaii Gamer · Sistema de SLIDES
  * Luana Jazmín 🎀 8 años
- *
- * Módulos:
- *  1. Sistema de slides
- *  2. Partículas flotantes
- *  3. Cuenta regresiva
- *  4. Confeti
- *  5. Botón WhatsApp
- *  6. Efecto sparkle
  */
 
 /* ============================================================
@@ -345,4 +337,40 @@ function launchConfetti() {
 
     spawn(touch.clientX, touch.clientY);
   }, { passive: true });
+})();
+
+/* ============================================================
+   7. MÚSICA DE FONDO
+============================================================ */
+(function initMusic() {
+  const audio = document.getElementById('musica-fondo');
+  const btn = document.getElementById('music-btn');
+
+  if (!audio || !btn) return;
+
+  let isPlaying = false;
+
+  audio.volume = 0.45;
+
+  btn.addEventListener('click', async () => {
+    try {
+      if (!isPlaying) {
+        await audio.play();
+
+        isPlaying = true;
+        btn.classList.add('playing');
+        btn.textContent = '⏸️';
+        btn.setAttribute('aria-label', 'Pausar música');
+      } else {
+        audio.pause();
+
+        isPlaying = false;
+        btn.classList.remove('playing');
+        btn.textContent = '🎵';
+        btn.setAttribute('aria-label', 'Reproducir música');
+      }
+    } catch (error) {
+      console.log('El navegador bloqueó la reproducción automática:', error);
+    }
+  });
 })();

@@ -6,13 +6,38 @@
 
   <title>🎀 Cumpleaños de Luana Jazmín 🎀</title>
 
-  <meta name="description" content="Invitación de cumpleaños de Luana Jazmín. Te esperamos para celebrar sus 8 años en una fiesta mágica, kawaii y llena de alegría.">
+  <!-- Descripción normal de la página -->
+  <meta name="description" content="Te invito a celebrar los 8 años de Luana Jazmín en una fiesta mágica, kawaii y llena de alegría.">
 
+  <!-- Vista previa para WhatsApp, Facebook y redes -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cumpleluana.netlify.app/">
+  <meta property="og:title" content="🎀 Invitación de Luana Jazmín | ¡Cumplo 8 años!">
+  <meta property="og:description" content="20 de junio de 2026 · 17:00 hs. Te esperamos para celebrar este día especial. 💖">
+
+  <!-- Imagen de vista previa para WhatsApp -->
+  <meta property="og:image" content="https://cumpleluana.netlify.app/img/preview-luana.PNG">
+  <meta property="og:image:secure_url" content="https://cumpleluana.netlify.app/img/preview-luana.PNG">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Vista previa para otras apps -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="🎀 Invitación de Luana Jazmín | ¡Cumplo 8 años!">
+  <meta name="twitter:description" content="20 de junio de 2026 · 17:00 hs. Te esperamos para celebrar este día especial. 💖">
+  <meta name="twitter:image" content="https://cumpleluana.netlify.app/img/preview-luana.PNG">
+
+  <!-- Color del navegador en celular -->
+  <meta name="theme-color" content="#f8c7e7">
+
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
+  <!-- CSS -->
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -31,7 +56,7 @@
       <div class="deco deco--bl" aria-hidden="true">🌸</div>
       <div class="deco deco--br" aria-hidden="true">⭐</div>
 
-      <!-- IMAGEN DE MUÑEQUITA -->
+      <!-- Imagen de muñequita -->
       <div class="chibi-wrapper">
         <img src="./img/lyna.png" alt="Muñequita kawaii de Luana Jazmín" class="hero-doll">
       </div>
@@ -199,8 +224,21 @@
 
   </nav>
 
+  <!-- Etiqueta de slide actual -->
   <div class="slide-label" id="slide-label" aria-live="polite">1 / 4</div>
 
+  <!-- Música de fondo -->
+  <audio id="musica-fondo" loop>
+    <source src="./audio/musica.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <!-- Botón de música -->
+  <button class="music-btn" id="music-btn" aria-label="Reproducir música">
+    🎵
+  </button>
+
+  <!-- JavaScript -->
   <script src="./script.js"></script>
 </body>
 </html>
