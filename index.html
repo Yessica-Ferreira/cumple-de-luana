@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎀 Cumpleaños de Luana Jazmín 🎀</title>
+
+  <!-- Google Fonts: Bubblegum Sans para títulos kawaii + Nunito para texto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       PARTÍCULAS FLOTANTES DE FONDO (generadas por JS)
+  ============================================================ -->
+  <div id="particles-container" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SECCIÓN 1 — PORTADA
+  ============================================================ -->
+  <section class="hero" id="portada">
+
+    <!-- Decoración superior: estrellas y corazones CSS -->
+    <div class="deco deco--top-left"  aria-hidden="true">⭐</div>
+    <div class="deco deco--top-right" aria-hidden="true">💜</div>
+
+    <!-- Personaje Lyna (chibi CSS art) -->
+    <div class="chibi-wrapper" aria-hidden="true">
+      <div class="chibi">
+        <!-- Cabello back -->
+        <div class="chibi__hair-back"></div>
+        <!-- Cara -->
+        <div class="chibi__face">
+          <div class="chibi__eye chibi__eye--left"></div>
+          <div class="chibi__eye chibi__eye--right"></div>
+          <div class="chibi__blush chibi__blush--left"></div>
+          <div class="chibi__blush chibi__blush--right"></div>
+          <div class="chibi__mouth"></div>
+        </div>
+        <!-- Cabello front / twintails -->
+        <div class="chibi__hair-front"></div>
+        <div class="chibi__twintail chibi__twintail--left"></div>
+        <div class="chibi__twintail chibi__twintail--right"></div>
+        <!-- Cuerpo -->
+        <div class="chibi__body">
+          <div class="chibi__shirt"></div>
+          <div class="chibi__skirt"></div>
+        </div>
+        <!-- Controlador gamer flotante -->
+        <div class="chibi__controller" title="🎮">🎮</div>
+      </div>
+    </div>
+
+    <!-- Textos principales -->
+    <div class="hero__content">
+      <p class="hero__subtitle">✨ Estás invitada/o a ✨</p>
+      <h1 class="hero__title">¡Cumplo<br><span class="hero__age">8 años!</span></h1>
+      <h2 class="hero__name">Luana Jazmín</h2>
+      <p class="hero__welcome">
+        Te invito a celebrar conmigo un día mágico,<br>
+        divertido y lleno de alegría. 🎀
+      </p>
+
+      <!-- Fecha destacada en la portada -->
+      <div class="hero__date-badge">
+        <span class="hero__date-icon">📅</span>
+        <span class="hero__date-text">20 · 06 · 2026 — 17:00 hs</span>
+      </div>
+    </div>
+
+    <!-- Deco inferior -->
+    <div class="deco deco--bottom-left"  aria-hidden="true">🌸</div>
+    <div class="deco deco--bottom-right" aria-hidden="true">⭐</div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 2 — CUENTA REGRESIVA
+  ============================================================ -->
+  <section class="countdown-section" id="cuenta-regresiva">
+    <div class="section-header">
+      <span class="section-icon">⏳</span>
+      <h2 class="section-title">¡Falta poquito!</h2>
+    </div>
+
+    <!-- Contador (se oculta cuando llega a 0) -->
+    <div class="countdown" id="countdown">
+      <div class="countdown__unit">
+        <div class="countdown__number" id="days">00</div>
+        <div class="countdown__label">Días</div>
+      </div>
+      <div class="countdown__sep">:</div>
+      <div class="countdown__unit">
+        <div class="countdown__number" id="hours">00</div>
+        <div class="countdown__label">Horas</div>
+      </div>
+      <div class="countdown__sep">:</div>
+      <div class="countdown__unit">
+        <div class="countdown__number" id="minutes">00</div>
+        <div class="countdown__label">Minutos</div>
+      </div>
+      <div class="countdown__sep">:</div>
+      <div class="countdown__unit">
+        <div class="countdown__number" id="seconds">00</div>
+        <div class="countdown__label">Segundos</div>
+      </div>
+    </div>
+
+    <!-- Mensaje cuando llega el gran día -->
+    <div class="countdown__party" id="party-msg" hidden>
+      <p class="party-text">🎉 ¡Hoy es el gran día! 🎉</p>
+      <p class="party-sub">¡Feliz cumpleaños, Luana Jazmín! 🎀💜</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 3 — DETALLES DEL EVENTO
+  ============================================================ -->
+  <section class="details-section" id="detalles">
+    <div class="section-header">
+      <span class="section-icon">🗺️</span>
+      <h2 class="section-title">Detalles del festejo</h2>
+    </div>
+
+    <div class="details-grid">
+
+      <!-- Tarjeta Lugar -->
+      <div class="detail-card detail-card--place">
+        <div class="detail-card__icon">📍</div>
+        <div class="detail-card__label">Lugar</div>
+        <div class="detail-card__value">Mi Domicilio</div>
+      </div>
+
+      <!-- Tarjeta Fecha -->
+      <div class="detail-card detail-card--date">
+        <div class="detail-card__icon">📅</div>
+        <div class="detail-card__label">Fecha</div>
+        <div class="detail-card__value">20 de junio<br>de 2026</div>
+      </div>
+
+      <!-- Tarjeta Hora -->
+      <div class="detail-card detail-card--time">
+        <div class="detail-card__icon">⏰</div>
+        <div class="detail-card__label">Hora</div>
+        <div class="detail-card__value">17:00 hs</div>
+      </div>
+
+      <!-- Tarjeta Edad -->
+      <div class="detail-card detail-card--age">
+        <div class="detail-card__icon">🎂</div>
+        <div class="detail-card__label">¡Cumple!</div>
+        <div class="detail-card__value">8 años</div>
+      </div>
+    </div>
+
+    <!-- Botón Google Maps -->
+    <a
+      href="https://maps.app.goo.gl/M7q7mQWb1rwnHe3fA"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn--maps"
+    >
+      🗺️ Cómo llegar
+    </a>
+  </section>
+
+
+  <!-- ============================================================
+       SECCIÓN 4 — CONFIRMACIÓN DE ASISTENCIA
+  ============================================================ -->
+  <section class="rsvp-section" id="confirmacion">
+    <div class="section-header">
+      <span class="section-icon">💌</span>
+      <h2 class="section-title">¡Confirmá tu asistencia!</h2>
+    </div>
+
+    <p class="rsvp-text">
+      ¿Vas a venir? ¡Avisame por WhatsApp y no te pierdas la fiesta más kawaii del año! 🌸🎮
+    </p>
+
+    <!-- Botón WhatsApp -->
+    <a
+      href="#"
+      id="whatsapp-btn"
+      class="btn btn--whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      💬 Confirmar Asistencia por WhatsApp
+    </a>
+
+    <!-- Emojis decorativos debajo -->
+    <div class="rsvp-deco" aria-hidden="true">
+      🎀 ⭐ 💜 🌸 🎮 ✨ 🩷 🌟
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+    <p>💜 Con todo el amor para Luana Jazmín 💜</p>
+    <p class="footer-sub">¡Te esperamos! 🎉</p>
+  </footer>
+
+
+  <!-- Script principal -->
+  <script src="./script.js"></script>
+</body>
+</html>
