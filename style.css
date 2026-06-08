@@ -5,46 +5,68 @@
 
 /* ─── VARIABLES ─── */
 :root {
-  --pink:        #ffb3d1;
-  --pink-deep:   #ff77a8;
-  --pink-light:  #ffe4f0;
-  --lilac:       #c9a0e8;
-  --lilac-deep:  #9b59b6;
+  --pink: #ffb3d1;
+  --pink-deep: #ff77a8;
+  --pink-light: #ffe4f0;
+
+  --lilac: #c9a0e8;
+  --lilac-deep: #9b59b6;
   --lilac-light: #ede0f8;
-  --sky:         #b3e5fc;
-  --sky-deep:    #4fc3f7;
-  --white:       #ffffff;
-  --purple:      #7c3aed;
-  --text-dark:   #3d1b5e;
-  --text-mid:    #7b5ea7;
 
-  --font-title:  'Bubblegum Sans', cursive;
-  --font-body:   'Nunito', sans-serif;
+  --sky: #b3e5fc;
+  --sky-deep: #4fc3f7;
 
-  --radius-lg:   24px;
-  --radius-xl:   36px;
-  --shadow-soft: 0 8px 32px rgba(155,89,182,0.18);
-  --shadow-card: 0 4px 20px rgba(155,89,182,0.15);
+  --white: #ffffff;
+  --purple: #7c3aed;
 
-  /* Altura del nav de slides */
+  --text-dark: #3d1b5e;
+  --text-mid: #7b5ea7;
+
+  --font-title: 'Bubblegum Sans', cursive;
+  --font-body: 'Nunito', sans-serif;
+
+  --radius-lg: 24px;
+  --radius-xl: 36px;
+
+  --shadow-soft: 0 8px 32px rgba(155, 89, 182, 0.18);
+  --shadow-card: 0 4px 20px rgba(155, 89, 182, 0.15);
+
   --nav-h: 80px;
 }
 
-/* ─── RESET ─── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; }
+/* ─── RESET GENERAL ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(160deg, #ffe4f0 0%, #ede0f8 35%, #d8f0ff 65%, #ffe4f0 100%);
+  background: linear-gradient(
+    160deg,
+    #ffe4f0 0%,
+    #ede0f8 35%,
+    #d8f0ff 65%,
+    #ffe4f0 100%
+  );
   background-attachment: fixed;
   color: var(--text-dark);
-  overflow: hidden;
   position: fixed;
   inset: 0;
+  overflow: hidden;
 }
 
-/* ─── PARTÍCULAS ─── */
+/* ─── PARTÍCULAS DE FONDO ─── */
 #particles-container {
   position: fixed;
   inset: 0;
@@ -52,6 +74,7 @@ body {
   z-index: 0;
   overflow: hidden;
 }
+
 .particle {
   position: absolute;
   animation: floatP linear infinite;
@@ -59,254 +82,181 @@ body {
   user-select: none;
   pointer-events: none;
 }
+
 @keyframes floatP {
-  0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0; }
-  10%  { opacity: 0.65; }
-  90%  { opacity: 0.45; }
-  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.65;
+  }
+
+  90% {
+    opacity: 0.45;
+  }
+
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
-/* ══════════════════════════════════════════════════════════
-   SLIDER — contenedor y slides
-══════════════════════════════════════════════════════════ */
+/* ============================================================
+   SLIDER PRINCIPAL
+============================================================ */
+
 .slider {
   position: fixed;
   inset: 0;
-  bottom: var(--nav-h);   /* deja espacio para la nav */
+  bottom: var(--nav-h);
   overflow: hidden;
   z-index: 1;
 }
 
-/* Cada slide ocupa exactamente la pantalla disponible */
+/* Cada slide ocupa la pantalla disponible sin generar barras */
 .slide {
   position: absolute;
   inset: 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(20px, 5vw, 60px) clamp(16px, 5vw, 60px);
-  text-align: center;
-  overflow-y: auto;         /* por si en pantallas muy pequeñas necesita scroll */
-  overflow-x: hidden;
 
-  /* Estado inicial: fuera de pantalla a la derecha */
+  padding: clamp(16px, 4vw, 50px) clamp(16px, 5vw, 60px);
+  text-align: center;
+
+  overflow: hidden;
+
   transform: translateX(100%);
   transition: transform 0.45s cubic-bezier(0.77, 0, 0.18, 1);
   will-change: transform;
 }
 
-/* Slide activo */
 .slide.active {
   transform: translateX(0%);
 }
 
-/* Slide que ya pasó (queda a la izquierda) */
 .slide.passed {
   transform: translateX(-100%);
 }
 
-/* Fondos por slide */
+/* ─── FONDOS DE CADA SLIDE ─── */
 .slide--hero {
   background:
-    radial-gradient(ellipse at 20% 15%, rgba(255,179,209,0.6) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 85%, rgba(179,229,252,0.55) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(201,160,232,0.35) 0%, transparent 70%);
+    radial-gradient(ellipse at 20% 15%, rgba(255, 179, 209, 0.6) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 85%, rgba(179, 229, 252, 0.55) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(201, 160, 232, 0.35) 0%, transparent 70%);
+  gap: clamp(14px, 4vw, 45px);
 }
 
 .slide--countdown {
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(201,160,232,0.5) 0%, transparent 55%),
-    radial-gradient(ellipse at 70% 80%, rgba(255,179,209,0.45) 0%, transparent 55%);
+    radial-gradient(ellipse at 30% 20%, rgba(201, 160, 232, 0.5) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 179, 209, 0.45) 0%, transparent 55%);
 }
 
 .slide--details {
   background:
-    radial-gradient(ellipse at 70% 20%, rgba(179,229,252,0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 30% 80%, rgba(201,160,232,0.45) 0%, transparent 55%);
+    radial-gradient(ellipse at 70% 20%, rgba(179, 229, 252, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 80%, rgba(201, 160, 232, 0.45) 0%, transparent 55%);
 }
 
 .slide--rsvp {
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(255,179,209,0.55) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 90%, rgba(201,160,232,0.4) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 30%, rgba(255, 179, 209, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 90%, rgba(201, 160, 232, 0.4) 0%, transparent 50%);
 }
 
-/* ─── DECORACIONES FLOTANTES ─── */
+/* ============================================================
+   DECORACIONES
+============================================================ */
+
 .deco {
   position: absolute;
   font-size: clamp(1.2rem, 3.5vw, 2rem);
   animation: floatDeco 3s ease-in-out infinite;
   pointer-events: none;
-  filter: drop-shadow(0 2px 6px rgba(201,160,232,0.5));
-}
-.deco--tl { top: 16px;    left:  16px;  animation-delay: 0s;   }
-.deco--tr { top: 16px;    right: 16px;  animation-delay: 0.6s; }
-.deco--bl { bottom: 16px; left:  16px;  animation-delay: 1.2s; }
-.deco--br { bottom: 16px; right: 16px;  animation-delay: 1.8s; }
-
-@keyframes floatDeco {
-  0%, 100% { transform: translateY(0)     scale(1);   }
-  50%       { transform: translateY(-8px) scale(1.1); }
-}
-
-/* ══════════════════════════════════════════════════════════
-   SLIDE 1 — HERO / PORTADA
-══════════════════════════════════════════════════════════ */
-.chibi-wrapper {
-  position: relative;
-  margin-bottom: 12px;
-  animation: floatChar 4s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes floatChar {
-  0%, 100% { transform: translateY(0);     }
-  50%       { transform: translateY(-12px); }
-}
-
-.chibi {
-  position: relative;
-  width: clamp(100px, 22vw, 140px);
-  height: clamp(140px, 30vw, 190px);
-  margin: 0 auto;
-}
-
-/* Cabello trasero */
-.chibi__hair-back {
-  position: absolute;
-  top: 4px; left: 50%;
-  transform: translateX(-50%);
-  width: 80%; height: 62%;
-  background: linear-gradient(180deg, #b8956a 0%, #9a7550 100%);
-  border-radius: 50% 50% 40% 40% / 50% 50% 30% 30%;
-  z-index: 1;
-}
-
-/* Cara */
-.chibi__face {
-  position: absolute;
-  top: 18px; left: 50%;
-  transform: translateX(-50%);
-  width: 58%; height: 38%;
-  background: #fce8d6;
-  border-radius: 50% 50% 45% 45%;
-  z-index: 3;
-  box-shadow: inset 0 -4px 8px rgba(200,140,100,0.15);
-}
-.chibi__eye {
-  position: absolute;
-  top: 34%; width: 22%; height: 28%;
-  background: radial-gradient(circle at 40% 35%, #6b4226, #3d2010);
-  border-radius: 50%;
-}
-.chibi__eye::after {
-  content: '';
-  position: absolute;
-  top: 20%; left: 20%;
-  width: 38%; height: 38%;
-  background: white;
-  border-radius: 50%;
-}
-.chibi__eye--left  { left:  16%; }
-.chibi__eye--right { right: 16%; }
-
-.chibi__blush {
-  position: absolute;
-  bottom: 22%; width: 22%; height: 12%;
-  background: rgba(255,150,150,0.4);
-  border-radius: 50%;
-}
-.chibi__blush--left  { left:  8%; }
-.chibi__blush--right { right: 8%; }
-
-.chibi__mouth {
-  position: absolute;
-  bottom: 12%; left: 50%;
-  transform: translateX(-50%);
-  width: 20%; height: 12%;
-  border: 2.5px solid #e07a90;
-  border-top: none;
-  border-radius: 0 0 10px 10px;
-}
-
-/* Cabello frontal */
-.chibi__hair-front {
-  position: absolute;
-  top: 14px; left: 50%;
-  transform: translateX(-50%);
-  width: 62%; height: 22%;
-  background: linear-gradient(180deg, #b8956a, #a07848);
-  border-radius: 40% 40% 0 0;
+  filter: drop-shadow(0 2px 6px rgba(201, 160, 232, 0.5));
   z-index: 4;
 }
-.chibi__hair-front::before {
-  content: '';
-  position: absolute;
-  top: 55%; left: 10%;
-  width: 14%; height: 40%;
-  background: #7c3aed;
-  border-radius: 4px 4px 8px 8px;
+
+.deco--tl {
+  top: 16px;
+  left: 16px;
+  animation-delay: 0s;
 }
 
-/* Twintails */
-.chibi__twintail {
-  position: absolute;
-  top: 10px; width: 24%; height: 52%;
-  background: linear-gradient(180deg, #b8956a, #9a7550);
-  border-radius: 50% 50% 40% 40% / 20% 20% 50% 50%;
-  z-index: 2;
+.deco--tr {
+  top: 16px;
+  right: 16px;
+  animation-delay: 0.6s;
 }
-.chibi__twintail::after {
-  content: '';
-  position: absolute;
-  top: 12%; left: 50%;
-  transform: translateX(-50%);
-  width: 30%; height: 65%;
-  background: rgba(124,58,237,0.38);
-  border-radius: 3px;
-}
-.chibi__twintail--left  { left: -8%;  transform: rotate(-12deg); }
-.chibi__twintail--right { right: -8%; transform: rotate(12deg);  }
 
-/* Cuerpo */
-.chibi__body {
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 52%; z-index: 2;
+.deco--bl {
+  bottom: 16px;
+  left: 16px;
+  animation-delay: 1.2s;
 }
-.chibi__shirt {
-  width: 100%; height: 50px;
-  background: white;
-  border: 2.5px solid #ddd;
-  border-radius: 12px 12px 0 0;
+
+.deco--br {
+  bottom: 16px;
+  right: 16px;
+  animation-delay: 1.8s;
 }
-.chibi__shirt::before {
-  content: '';
+
+@keyframes floatDeco {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-8px) scale(1.1);
+  }
+}
+
+/* ============================================================
+   SLIDE 1 — PORTADA CON IMAGEN
+============================================================ */
+
+.chibi-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 5;
+  animation: floatChar 4s ease-in-out infinite;
+}
+
+@keyframes floatChar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Imagen de muñequita adaptable sin barras deslizantes */
+.hero-doll {
+  width: auto;
+  height: min(46vh, 360px);
+  max-width: min(38vw, 360px);
   display: block;
-  width: 100%; height: 7px;
-  background: #c9a0e8;
-  border-radius: 4px 4px 0 0;
-}
-.chibi__skirt {
-  width: 100%; height: 20px;
-  background: linear-gradient(180deg, #c9a0e8, #a07acd);
-  border-radius: 0 0 14px 14px;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 10px 18px rgba(124, 58, 237, 0.22))
+    drop-shadow(0 0 8px rgba(255, 119, 168, 0.18));
 }
 
-.chibi__controller {
-  position: absolute;
-  bottom: -4px; right: -30px;
-  font-size: clamp(1.2rem, 4vw, 1.6rem);
-  animation: wiggleCtrl 3s ease-in-out infinite;
+.hero__content {
+  z-index: 5;
+  position: relative;
+  max-width: 460px;
 }
-@keyframes wiggleCtrl {
-  0%, 100% { transform: rotate(-10deg) scale(1);   }
-  50%       { transform: rotate(10deg)  scale(1.1); }
-}
-
-/* Textos hero */
-.hero__content { z-index: 5; position: relative; }
 
 .hero__subtitle {
   font-size: clamp(0.75rem, 2vw, 0.95rem);
@@ -316,19 +266,26 @@ body {
   text-transform: uppercase;
   margin-bottom: 4px;
 }
+
 .hero__title {
   font-family: var(--font-title);
-  font-size: clamp(2.4rem, 10vw, 5rem);
+  font-size: clamp(2.2rem, 8vw, 4.8rem);
   color: var(--pink-deep);
   line-height: 1.05;
-  text-shadow: 3px 3px 0 var(--lilac), 6px 6px 18px rgba(255,119,168,0.3);
+  text-shadow:
+    3px 3px 0 var(--lilac),
+    6px 6px 18px rgba(255, 119, 168, 0.3);
   margin-bottom: 2px;
 }
+
 .hero__age {
   color: var(--lilac-deep);
   display: block;
-  text-shadow: 3px 3px 0 var(--pink), 6px 6px 18px rgba(124,58,237,0.25);
+  text-shadow:
+    3px 3px 0 var(--pink),
+    6px 6px 18px rgba(124, 58, 237, 0.25);
 }
+
 .hero__name {
   font-family: var(--font-title);
   font-size: clamp(1.5rem, 5vw, 2.8rem);
@@ -336,6 +293,7 @@ body {
   margin-bottom: 8px;
   text-shadow: 2px 2px 0 var(--pink-light);
 }
+
 .hero__welcome {
   font-size: clamp(0.85rem, 2.2vw, 1rem);
   color: var(--text-mid);
@@ -343,25 +301,36 @@ body {
   font-weight: 600;
   margin-bottom: 14px;
 }
+
 .hero__date-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  background: rgba(255,255,255,0.75);
+
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
+
   border: 2px solid var(--lilac);
   border-radius: 50px;
+
   padding: 8px 20px;
+
   font-family: var(--font-title);
   font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   color: var(--lilac-deep);
+
   box-shadow: var(--shadow-soft);
 }
 
-/* ══════════════════════════════════════════════════════════
-   SLIDE 2 — CUENTA REGRESIVA
-══════════════════════════════════════════════════════════ */
-.section-header { margin-bottom: clamp(16px, 4vw, 28px); }
+/* ============================================================
+   ENCABEZADOS GENERALES
+============================================================ */
+
+.section-header {
+  margin-bottom: clamp(16px, 4vw, 28px);
+  z-index: 5;
+}
 
 .section-icon {
   font-size: clamp(2rem, 6vw, 3rem);
@@ -369,23 +338,37 @@ body {
   margin-bottom: 6px;
   animation: bounce 2s ease-in-out infinite;
 }
+
 @keyframes bounce {
-  0%, 100% { transform: translateY(0);    }
-  50%       { transform: translateY(-7px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
 }
 
 .section-title {
   font-family: var(--font-title);
   font-size: clamp(1.6rem, 5vw, 2.8rem);
   color: var(--lilac-deep);
-  text-shadow: 2px 2px 0 var(--pink), 4px 4px 12px rgba(201,160,232,0.4);
+  text-shadow:
+    2px 2px 0 var(--pink),
+    4px 4px 12px rgba(201, 160, 232, 0.4);
 }
+
 .section-sub {
   font-size: clamp(0.8rem, 2vw, 0.95rem);
   color: var(--text-mid);
   font-weight: 600;
   margin-top: 4px;
 }
+
+/* ============================================================
+   SLIDE 2 — CUENTA REGRESIVA
+============================================================ */
 
 .countdown {
   display: flex;
@@ -394,21 +377,30 @@ body {
   gap: clamp(4px, 1.5vw, 14px);
   flex-wrap: wrap;
   margin-bottom: 16px;
+  z-index: 5;
 }
+
 .countdown__unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255,255,255,0.82);
+
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(10px);
+
   border: 2.5px solid var(--lilac);
   border-radius: var(--radius-lg);
+
   padding: clamp(10px, 2.5vw, 20px) clamp(12px, 3vw, 26px);
   min-width: clamp(62px, 16vw, 92px);
+
   box-shadow: var(--shadow-card);
   transition: transform 0.2s;
 }
-.countdown__unit:hover { transform: translateY(-3px) scale(1.05); }
+
+.countdown__unit:hover {
+  transform: translateY(-3px) scale(1.05);
+}
 
 .countdown__number {
   font-family: var(--font-title);
@@ -416,9 +408,12 @@ body {
   color: var(--pink-deep);
   line-height: 1;
   text-shadow: 2px 2px 0 var(--lilac);
-  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.countdown__number.pop { transform: scale(1.3); }
+
+.countdown__number.pop {
+  transform: scale(1.3);
+}
 
 .countdown__label {
   font-size: clamp(0.6rem, 1.5vw, 0.75rem);
@@ -428,6 +423,7 @@ body {
   letter-spacing: 1.5px;
   margin-top: 3px;
 }
+
 .countdown__sep {
   font-family: var(--font-title);
   font-size: clamp(1.6rem, 5vw, 2.6rem);
@@ -435,12 +431,23 @@ body {
   margin-bottom: 18px;
   animation: blink 1s ease-in-out infinite;
 }
+
 @keyframes blink {
-  0%, 100% { opacity: 1;   }
-  50%       { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
 }
 
-.countdown__party { text-align: center; }
+.countdown__party {
+  text-align: center;
+  z-index: 5;
+}
+
 .party-text {
   font-family: var(--font-title);
   font-size: clamp(1.8rem, 6vw, 3rem);
@@ -448,15 +455,23 @@ body {
   text-shadow: 3px 3px 0 var(--lilac);
   animation: partyPulse 1.5s ease-in-out infinite;
 }
+
 .party-sub {
   font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   color: var(--lilac-deep);
   font-weight: 700;
   margin-top: 8px;
 }
+
 @keyframes partyPulse {
-  0%, 100% { transform: scale(1);    }
-  50%       { transform: scale(1.05); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .slide-deco-row {
@@ -465,62 +480,114 @@ body {
   opacity: 0.6;
   margin-top: 12px;
   animation: glowRow 3s ease-in-out infinite;
-}
-@keyframes glowRow {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 0.85; }
+  z-index: 5;
 }
 
-/* ══════════════════════════════════════════════════════════
+@keyframes glowRow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* ============================================================
    SLIDE 3 — DETALLES
-══════════════════════════════════════════════════════════ */
+============================================================ */
+
 .details-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: clamp(10px, 2.5vw, 18px);
+
   max-width: 500px;
   width: 100%;
   margin: 0 auto 20px;
+  z-index: 5;
 }
 
 .detail-card {
-  background: rgba(255,255,255,0.82);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(12px);
+
   border: 2.5px solid var(--lilac);
   border-radius: var(--radius-xl);
+
   padding: clamp(14px, 3vw, 24px) clamp(10px, 2vw, 18px);
+
   box-shadow: var(--shadow-card);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .detail-card:hover {
   transform: translateY(-5px) rotate(-1deg);
-  box-shadow: 0 12px 36px rgba(155,89,182,0.25);
+  box-shadow: 0 12px 36px rgba(155, 89, 182, 0.25);
 }
-.detail-card--place { border-color: var(--pink-deep);  }
-.detail-card--date  { border-color: var(--lilac-deep); }
-.detail-card--time  { border-color: var(--sky-deep);   }
-.detail-card--age   { border-color: var(--purple);     }
 
-.detail-card__icon  { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 4px; display: block; }
-.detail-card__label { font-size: clamp(0.6rem, 1.5vw, 0.72rem); font-weight: 800; color: var(--text-mid); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
-.detail-card__value { font-family: var(--font-title); font-size: clamp(0.95rem, 2.5vw, 1.3rem); color: var(--text-dark); line-height: 1.3; }
+.detail-card--place {
+  border-color: var(--pink-deep);
+}
 
-/* ══════════════════════════════════════════════════════════
+.detail-card--date {
+  border-color: var(--lilac-deep);
+}
+
+.detail-card--time {
+  border-color: var(--sky-deep);
+}
+
+.detail-card--age {
+  border-color: var(--purple);
+}
+
+.detail-card__icon {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.detail-card__label {
+  font-size: clamp(0.6rem, 1.5vw, 0.72rem);
+  font-weight: 800;
+  color: var(--text-mid);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
+}
+
+.detail-card__value {
+  font-family: var(--font-title);
+  font-size: clamp(0.95rem, 2.5vw, 1.3rem);
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+/* ============================================================
    SLIDE 4 — RSVP
-══════════════════════════════════════════════════════════ */
-.rsvp-footer { margin-top: 24px; }
+============================================================ */
+
+.rsvp-footer {
+  margin-top: 24px;
+  z-index: 5;
+}
+
 .rsvp-love {
   font-family: var(--font-title);
   font-size: clamp(1rem, 3vw, 1.4rem);
   color: var(--lilac-deep);
   margin-bottom: 4px;
 }
+
 .rsvp-sub {
   font-size: clamp(0.8rem, 2vw, 0.95rem);
   color: var(--text-mid);
   font-weight: 700;
   margin-bottom: 12px;
 }
+
 .rsvp-deco {
   font-size: clamp(1rem, 3vw, 1.5rem);
   letter-spacing: 5px;
@@ -528,89 +595,138 @@ body {
   animation: glowRow 3s ease-in-out infinite;
 }
 
-/* ─── BOTONES ─── */
+/* ============================================================
+   BOTONES
+============================================================ */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+
   padding: clamp(12px, 2.5vw, 16px) clamp(24px, 5vw, 42px);
   border-radius: 50px;
+
   font-family: var(--font-title);
   font-size: clamp(0.95rem, 2.5vw, 1.2rem);
   text-decoration: none;
+
   cursor: pointer;
   border: none;
+
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
+  z-index: 5;
 }
+
 .btn::after {
   content: '';
   position: absolute;
-  top: -50%; left: -75%;
-  width: 50%; height: 200%;
-  background: rgba(255,255,255,0.3);
+  top: -50%;
+  left: -75%;
+
+  width: 50%;
+  height: 200%;
+
+  background: rgba(255, 255, 255, 0.3);
   transform: skewX(-20deg);
   transition: left 0.5s ease;
 }
-.btn:hover::after  { left: 130%; }
-.btn:hover         { transform: translateY(-3px) scale(1.04); box-shadow: 0 10px 28px rgba(155,89,182,0.3); }
-.btn:active        { transform: scale(0.97); }
 
-.btn--maps     { background: linear-gradient(135deg, var(--sky-deep), #29b6f6); color: white; box-shadow: 0 6px 20px rgba(79,195,247,0.3); }
-.btn--whatsapp { background: linear-gradient(135deg, #25d366, #128c4a); color: white; box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+.btn:hover::after {
+  left: 130%;
+}
 
-/* ══════════════════════════════════════════════════════════
-   NAVEGACIÓN DE SLIDES (barra inferior fija)
-══════════════════════════════════════════════════════════ */
+.btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(155, 89, 182, 0.3);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn--maps {
+  background: linear-gradient(135deg, var(--sky-deep), #29b6f6);
+  color: white;
+  box-shadow: 0 6px 20px rgba(79, 195, 247, 0.3);
+}
+
+.btn--whatsapp {
+  background: linear-gradient(135deg, #25d366, #128c4a);
+  color: white;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
+/* ============================================================
+   NAVEGACIÓN INFERIOR
+============================================================ */
+
 .slide-nav {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
   height: var(--nav-h);
   z-index: 100;
+
   display: flex;
   align-items: center;
   justify-content: center;
   gap: clamp(12px, 4vw, 28px);
-  background: rgba(255,255,255,0.7);
+
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
-  border-top: 2px solid rgba(201,160,232,0.4);
-  box-shadow: 0 -4px 24px rgba(155,89,182,0.12);
+
+  border-top: 2px solid rgba(201, 160, 232, 0.4);
+  box-shadow: 0 -4px 24px rgba(155, 89, 182, 0.12);
 }
 
-/* Botones ‹ › */
 .nav-btn {
   width: clamp(44px, 10vw, 52px);
   height: clamp(44px, 10vw, 52px);
+
   border-radius: 50%;
   border: 2.5px solid var(--lilac);
-  background: rgba(255,255,255,0.9);
+
+  background: rgba(255, 255, 255, 0.9);
   color: var(--lilac-deep);
+
   font-size: clamp(1.4rem, 4vw, 1.8rem);
   font-family: var(--font-title);
+
   cursor: pointer;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   line-height: 1;
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 3px 12px rgba(155,89,182,0.18);
+  box-shadow: 0 3px 12px rgba(155, 89, 182, 0.18);
+
   -webkit-tap-highlight-color: transparent;
 }
+
 .nav-btn:hover:not(:disabled) {
   background: var(--lilac);
   color: white;
   transform: scale(1.08);
-  box-shadow: 0 6px 18px rgba(155,89,182,0.3);
+  box-shadow: 0 6px 18px rgba(155, 89, 182, 0.3);
 }
-.nav-btn:active:not(:disabled) { transform: scale(0.94); }
+
+.nav-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
 .nav-btn:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-/* Puntos indicadores */
 .nav-dots {
   display: flex;
   align-items: center;
@@ -620,61 +736,82 @@ body {
 .nav-dot {
   width: clamp(10px, 2.5vw, 14px);
   height: clamp(10px, 2.5vw, 14px);
+
   border-radius: 50%;
   border: 2.5px solid var(--lilac);
+
   background: transparent;
+
   cursor: pointer;
+
   transition: background 0.25s, transform 0.25s, width 0.25s;
+
   -webkit-tap-highlight-color: transparent;
   padding: 0;
 }
+
 .nav-dot.active {
   background: var(--pink-deep);
   border-color: var(--pink-deep);
   transform: scale(1.25);
-  /* Pastilla alargada en el activo */
+
   border-radius: 6px;
   width: clamp(26px, 6vw, 34px);
 }
+
 .nav-dot:hover:not(.active) {
   background: var(--lilac);
   border-color: var(--lilac);
 }
 
-/* Etiqueta "1 / 4" */
 .slide-label {
   position: fixed;
   bottom: calc(var(--nav-h) + 10px);
   right: 16px;
+
   font-family: var(--font-title);
   font-size: clamp(0.75rem, 2vw, 0.9rem);
   color: var(--lilac-deep);
-  background: rgba(255,255,255,0.7);
+
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(8px);
+
   border: 1.5px solid var(--lilac);
   border-radius: 20px;
+
   padding: 3px 10px;
   z-index: 101;
 }
 
-/* ══════════════════════════════════════════════════════════
-   ANIMACIÓN SPARKLE (inyectada por JS)
-══════════════════════════════════════════════════════════ */
+/* ============================================================
+   EFECTO SPARKLE
+============================================================ */
+
 @keyframes sparkleOut {
-  0%   { opacity: 1; transform: translate(-50%,-50%) scale(1);   }
-  100% { opacity: 0; transform: translate(-50%,-80%) scale(1.8); }
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -80%) scale(1.8);
+  }
 }
 
-/* ══════════════════════════════════════════════════════════
-   RESPONSIVE — ajustes para pantallas más grandes
-══════════════════════════════════════════════════════════ */
+/* ============================================================
+   RESPONSIVE — COMPUTADORA
+============================================================ */
+
 @media (min-width: 768px) {
   .slide--hero {
     flex-direction: row;
-    gap: 40px;
     text-align: left;
   }
-  .hero__welcome { margin: 0 0 14px; }
+
+  .hero__welcome {
+    margin: 0 0 14px;
+  }
 
   .details-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -682,10 +819,133 @@ body {
   }
 }
 
+/* ============================================================
+   RESPONSIVE — NOTEBOOKS O PANTALLAS BAJAS
+============================================================ */
+
+@media (max-height: 720px) {
+  .hero-doll {
+    height: min(42vh, 310px);
+    max-width: min(36vw, 320px);
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 7vw, 4rem);
+  }
+
+  .hero__name {
+    font-size: clamp(1.4rem, 4vw, 2.3rem);
+  }
+
+  .hero__welcome {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .hero__date-badge {
+    padding: 7px 16px;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — CELULARES
+============================================================ */
+
+@media (max-width: 767px) {
+  .slide--hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .hero-doll {
+    height: min(34vh, 260px);
+    max-width: 80vw;
+  }
+
+  .hero__content {
+    max-width: 95%;
+  }
+
+  .hero__title {
+    font-size: clamp(2.1rem, 12vw, 3.8rem);
+  }
+
+  .hero__name {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .hero__welcome {
+    font-size: 0.88rem;
+    line-height: 1.4;
+  }
+
+  .hero__date-badge {
+    padding: 8px 15px;
+    font-size: 0.95rem;
+  }
+
+  .countdown {
+    gap: 6px;
+  }
+
+  .countdown__sep {
+    display: none;
+  }
+
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — CELULARES MUY BAJITOS
+============================================================ */
+
 @media (max-height: 600px) {
-  /* Pantallas muy cortas (landscape mobile) */
-  :root { --nav-h: 64px; }
-  .chibi-wrapper { display: none; } /* oculta el chibi en landscape muy pequeño */
-  .section-icon  { font-size: 1.5rem; }
-  .slide { padding: 12px; }
+  :root {
+    --nav-h: 64px;
+  }
+
+  .slide {
+    padding: 10px 14px;
+  }
+
+  .hero-doll {
+    height: 28vh;
+    max-width: 220px;
+  }
+
+  .hero__title {
+    font-size: 2.1rem;
+  }
+
+  .hero__name {
+    font-size: 1.5rem;
+  }
+
+  .hero__welcome {
+    display: none;
+  }
+
+  .section-icon {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .section-sub {
+    font-size: 0.8rem;
+  }
+
+  .detail-card {
+    padding: 10px;
+  }
+
+  .rsvp-footer {
+    margin-top: 14px;
+  }
 }

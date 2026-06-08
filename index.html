@@ -3,58 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>🎀 Cumpleaños de Luana Jazmín 🎀</title>
+
+  <meta name="description" content="Invitación de cumpleaños de Luana Jazmín. Te esperamos para celebrar sus 8 años en una fiesta mágica, kawaii y llena de alegría.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
 
   <!-- Partículas de fondo -->
   <div id="particles-container" aria-hidden="true"></div>
 
-  <!-- ══════════════════════════════════════════
-       CONTENEDOR PRINCIPAL DE SLIDES
-  ══════════════════════════════════════════ -->
+  <!-- CONTENEDOR PRINCIPAL DE SLIDES -->
   <div class="slider" id="slider">
 
-    <!-- ───────────── SLIDE 1: PORTADA ───────────── -->
+    <!-- SLIDE 1: PORTADA -->
     <div class="slide slide--hero" data-slide="0">
       <div class="deco deco--tl" aria-hidden="true">⭐</div>
       <div class="deco deco--tr" aria-hidden="true">💜</div>
       <div class="deco deco--bl" aria-hidden="true">🌸</div>
       <div class="deco deco--br" aria-hidden="true">⭐</div>
 
-      <!-- Chibi kawaii CSS -->
-      <div class="chibi-wrapper" aria-hidden="true">
-        <div class="chibi">
-          <div class="chibi__hair-back"></div>
-          <div class="chibi__face">
-            <div class="chibi__eye chibi__eye--left"></div>
-            <div class="chibi__eye chibi__eye--right"></div>
-            <div class="chibi__blush chibi__blush--left"></div>
-            <div class="chibi__blush chibi__blush--right"></div>
-            <div class="chibi__mouth"></div>
-          </div>
-          <div class="chibi__hair-front"></div>
-          <div class="chibi__twintail chibi__twintail--left"></div>
-          <div class="chibi__twintail chibi__twintail--right"></div>
-          <div class="chibi__body">
-            <div class="chibi__shirt"></div>
-            <div class="chibi__skirt"></div>
-          </div>
-          <div class="chibi__controller">🎮</div>
-        </div>
+      <!-- IMAGEN DE MUÑEQUITA -->
+      <div class="chibi-wrapper">
+        <img src="./img/lyna.png" alt="Muñequita kawaii de Luana Jazmín" class="hero-doll">
       </div>
 
       <div class="hero__content">
-        <p class="hero__subtitle">✨ Estás invitada/o a ✨</p>
-        <h1 class="hero__title">¡Cumplo<br><span class="hero__age">8 años!</span></h1>
+        <p class="hero__subtitle">✨ Estás invitada/o a mi ✨</p>
+
+        <h1 class="hero__title">
+          ¡Cumple<br>
+          <span class="hero__age">8 años!</span>
+        </h1>
+
         <h2 class="hero__name">Luana Jazmín</h2>
+
         <p class="hero__welcome">
-          Te invito a celebrar conmigo un día mágico,<br>divertido y lleno de alegría. 🎀
+          Te invito a celebrar conmigo un día mágico,<br>
+          divertido y lleno de alegría. 🎀
         </p>
+
         <div class="hero__date-badge">
           <span>📅</span>
           <span>20 · 06 · 2026 — 17:00 hs</span>
@@ -62,7 +58,7 @@
       </div>
     </div>
 
-    <!-- ───────────── SLIDE 2: CUENTA REGRESIVA ───────────── -->
+    <!-- SLIDE 2: CUENTA REGRESIVA -->
     <div class="slide slide--countdown" data-slide="1">
       <div class="deco deco--tl" aria-hidden="true">⏳</div>
       <div class="deco deco--tr" aria-hidden="true">💫</div>
@@ -78,17 +74,23 @@
           <div class="countdown__number" id="days">00</div>
           <div class="countdown__label">Días</div>
         </div>
+
         <div class="countdown__sep">:</div>
+
         <div class="countdown__unit">
           <div class="countdown__number" id="hours">00</div>
           <div class="countdown__label">Horas</div>
         </div>
+
         <div class="countdown__sep">:</div>
+
         <div class="countdown__unit">
           <div class="countdown__number" id="minutes">00</div>
           <div class="countdown__label">Min</div>
         </div>
+
         <div class="countdown__sep">:</div>
+
         <div class="countdown__unit">
           <div class="countdown__number" id="seconds">00</div>
           <div class="countdown__label">Seg</div>
@@ -100,10 +102,12 @@
         <p class="party-sub">¡Feliz cumpleaños, Luana Jazmín! 🎀💜</p>
       </div>
 
-      <div class="slide-deco-row" aria-hidden="true">🌸 ⭐ 💜 ✨ 🎀 💫 🌟</div>
+      <div class="slide-deco-row" aria-hidden="true">
+        🌸 ⭐ 💜 ✨ 🎀 💫 🌟
+      </div>
     </div>
 
-    <!-- ───────────── SLIDE 3: DETALLES ───────────── -->
+    <!-- SLIDE 3: DETALLES -->
     <div class="slide slide--details" data-slide="2">
       <div class="deco deco--tl" aria-hidden="true">🗺️</div>
       <div class="deco deco--tr" aria-hidden="true">🌸</div>
@@ -111,7 +115,7 @@
       <div class="section-header">
         <span class="section-icon">🎊</span>
         <h2 class="section-title">Detalles del festejo</h2>
-        <p class="section-sub">¡Anotate todo para no perderte nada!</p>
+        <p class="section-sub">¡Anota todo para no perderte nada!</p>
       </div>
 
       <div class="details-grid">
@@ -120,16 +124,19 @@
           <div class="detail-card__label">Lugar</div>
           <div class="detail-card__value">Mi Domicilio</div>
         </div>
+
         <div class="detail-card detail-card--date">
           <div class="detail-card__icon">📅</div>
           <div class="detail-card__label">Fecha</div>
           <div class="detail-card__value">20 de junio<br>de 2026</div>
         </div>
+
         <div class="detail-card detail-card--time">
           <div class="detail-card__icon">⏰</div>
           <div class="detail-card__label">Hora</div>
           <div class="detail-card__value">17:00 hs</div>
         </div>
+
         <div class="detail-card detail-card--age">
           <div class="detail-card__icon">🎂</div>
           <div class="detail-card__label">¡Cumple!</div>
@@ -142,7 +149,7 @@
       </a>
     </div>
 
-    <!-- ───────────── SLIDE 4: CONFIRMACIÓN ───────────── -->
+    <!-- SLIDE 4: CONFIRMACIÓN -->
     <div class="slide slide--rsvp" data-slide="3">
       <div class="deco deco--tl" aria-hidden="true">💌</div>
       <div class="deco deco--tr" aria-hidden="true">🎀</div>
@@ -152,7 +159,9 @@
       <div class="section-header">
         <span class="section-icon">💌</span>
         <h2 class="section-title">¡Confirmá tu<br>asistencia!</h2>
-        <p class="section-sub">¿Vas a venir? ¡Avisame por WhatsApp y no te pierdas la fiesta más kawaii del año! 🌸🎮</p>
+        <p class="section-sub">
+          ¿Vas a venir? ¡Avisame por WhatsApp y no te pierdas la fiesta más kawaii del año! 🌸🎮
+        </p>
       </div>
 
       <a href="#" id="whatsapp-btn" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
@@ -162,38 +171,34 @@
       <div class="rsvp-footer">
         <p class="rsvp-love">💜 Con todo el amor para Luana Jazmín 💜</p>
         <p class="rsvp-sub">¡Te esperamos! 🎉</p>
-        <div class="rsvp-deco" aria-hidden="true">🎀 ⭐ 💜 🌸 🎮 ✨ 🩷 🌟</div>
+        <div class="rsvp-deco" aria-hidden="true">
+          🎀 ⭐ 💜 🌸 🎮 ✨ 🩷 🌟
+        </div>
       </div>
     </div>
 
-  </div><!-- /slider -->
+  </div>
 
-  <!-- ══════════════════════════════════════════
-       NAVEGACIÓN DE SLIDES
-  ══════════════════════════════════════════ -->
+  <!-- NAVEGACIÓN DE SLIDES -->
   <nav class="slide-nav" aria-label="Navegación de secciones">
 
-    <!-- Botón anterior -->
     <button class="nav-btn nav-btn--prev" id="btn-prev" aria-label="Anterior" disabled>
       ‹
     </button>
 
-    <!-- Puntos indicadores -->
     <div class="nav-dots" id="nav-dots" role="tablist">
-      <button class="nav-dot active" data-index="0" aria-label="Portada"         role="tab" aria-selected="true"></button>
-      <button class="nav-dot"        data-index="1" aria-label="Cuenta regresiva" role="tab" aria-selected="false"></button>
-      <button class="nav-dot"        data-index="2" aria-label="Detalles"         role="tab" aria-selected="false"></button>
-      <button class="nav-dot"        data-index="3" aria-label="Asistencia"       role="tab" aria-selected="false"></button>
+      <button class="nav-dot active" data-index="0" aria-label="Portada" role="tab" aria-selected="true"></button>
+      <button class="nav-dot" data-index="1" aria-label="Cuenta regresiva" role="tab" aria-selected="false"></button>
+      <button class="nav-dot" data-index="2" aria-label="Detalles" role="tab" aria-selected="false"></button>
+      <button class="nav-dot" data-index="3" aria-label="Asistencia" role="tab" aria-selected="false"></button>
     </div>
 
-    <!-- Botón siguiente -->
     <button class="nav-btn nav-btn--next" id="btn-next" aria-label="Siguiente">
       ›
     </button>
 
   </nav>
 
-  <!-- Etiqueta de slide actual -->
   <div class="slide-label" id="slide-label" aria-live="polite">1 / 4</div>
 
   <script src="./script.js"></script>
