@@ -1,154 +1,230 @@
 /**
- * script.js — Invitación de Cumpleaños Kawaii Gamer
- * Luana Jazmín 🎀 — 8 años
+ * script.js — Invitación Kawaii Gamer · Sistema de SLIDES
+ * Luana Jazmín 🎀 8 años
  *
- * Funcionalidades:
- *  1. Partículas flotantes de fondo
- *  2. Cuenta regresiva dinámica
- *  3. Botón de WhatsApp con mensaje predeterminado
- *  4. Scroll reveal (animación de entrada)
+ * Módulos:
+ *  1. Sistema de slides (botones, puntos, swipe táctil, teclado)
+ *  2. Partículas flotantes de fondo
+ *  3. Cuenta regresiva dinámica
+ *  4. Botón WhatsApp
+ *  5. Efecto sparkle al tocar
  */
 
 /* ============================================================
-   1. PARTÍCULAS FLOTANTES DE FONDO
+   1. SISTEMA DE SLIDES
+============================================================ */
+(function initSlider() {
+  const slides    = Array.from(document.querySelectorAll('.slide'));
+  const dots      = Array.from(document.querySelectorAll('.nav-dot'));
+  const btnPrev   = document.getElementById('btn-prev');
+  const btnNext   = document.getElementById('btn-next');
+  const labelEl   = document.getElementById('slide-label');
+  const TOTAL     = slides.length;
+  let current     = 0;      // índice activo
+  let isAnimating = false;  // bloqueo durante transición
+
+  /**
+   * Navega al slide indicado.
+   * @param {number} index  — índice destino
+   */
+  function goTo(index) {
+    if (index === current || isAnimating) return;
+    if (index < 0 || index >= TOTAL)      return;
+
+    isAnimating = true;
+
+    const prev = current;
+    current    = index;
+
+    // Marca el slide anterior como "passed" (sale a la izquierda)
+    slides[prev].classList.remove('active');
+    slides[prev].classList.add('passed');
+
+    // Si retrocedemos: el anterior sale a la derecha, no a la izquierda
+    if (index < prev) {
+      slides[prev].classList.remove('passed');
+      slides[prev].style.transform = 'translateX(100%)';
+    }
+
+    // Activa el nuevo slide
+    slides[current].classList.add('active');
+
+    // Quita transformaciones inline del anterior después de la transición
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) {
+          s.classList.remove('active', 'passed');
+          s.style.transform = '';
+        }
+      });
+      isAnimating = false;
+    }, 460); // debe coincidir con el transition del CSS
+
+    updateUI();
+  }
+
+  /** Actualiza botones, puntos y etiqueta */
+  function updateUI() {
+    // Botones prev / next
+    btnPrev.disabled = (current === 0);
+    btnNext.disabled = (current === TOTAL - 1);
+
+    // Puntos
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', i === current ? 'true' : 'false');
+    });
+
+    // Etiqueta "X / 4"
+    if (labelEl) labelEl.textContent = `${current + 1} / ${TOTAL}`;
+  }
+
+  /* Inicialización: activa el primer slide */
+  slides.forEach((s, i) => {
+    if (i === 0) s.classList.add('active');
+    // Los demás quedan con transform: translateX(100%) del CSS
+  });
+  updateUI();
+
+  /* ── Eventos de botones ── */
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
+
+  /* ── Puntos indicadores ── */
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goTo(i));
+  });
+
+  /* ── Teclado (←  →) ── */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    goTo(current - 1);
+  });
+
+  /* ── Swipe táctil ── */
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+
+    // Solo cuenta como swipe horizontal si el movimiento X supera al Y
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 45) {
+      if (dx < 0) goTo(current + 1); // swipe izquierda → siguiente
+      else         goTo(current - 1); // swipe derecha  → anterior
+    }
+  }, { passive: true });
+
+})();
+
+
+/* ============================================================
+   2. PARTÍCULAS FLOTANTES DE FONDO
 ============================================================ */
 (function initParticles() {
   const container = document.getElementById('particles-container');
   if (!container) return;
 
-  // Emojis kawaii / gamer que flotan
   const symbols = [
-    '⭐', '💜', '🌸', '✨', '💫', '🎮',
-    '🩷', '🌟', '💕', '🎀', '🕹️', '🌈',
-    '💖', '⚡', '🦋', '🌙', '🪄', '🎵'
+    '⭐','💜','🌸','✨','💫','🎮','🩷',
+    '🌟','💕','🎀','🕹️','🌈','💖','⚡','🦋'
   ];
 
-  const PARTICLE_COUNT = 28; // cantidad de partículas
+  const COUNT = 22;
 
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    const el = document.createElement('span');
+  for (let i = 0; i < COUNT; i++) {
+    const el          = document.createElement('span');
     el.classList.add('particle');
-    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-
-    // Posición horizontal aleatoria
-    el.style.left = Math.random() * 100 + 'vw';
-
-    // Duración de animación aleatoria (entre 8 y 22 segundos)
-    const duration = 8 + Math.random() * 14;
-    el.style.animationDuration = duration + 's';
-
-    // Retraso aleatorio para que no salgan todas juntas
-    el.style.animationDelay = Math.random() * duration + 's';
-
-    // Tamaño levemente variable
-    const size = 12 + Math.random() * 14;
-    el.style.fontSize = size + 'px';
-
+    el.textContent    = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left     = Math.random() * 100 + 'vw';
+    const dur         = 9 + Math.random() * 13;
+    el.style.animationDuration  = dur + 's';
+    el.style.animationDelay     = Math.random() * dur + 's';
+    el.style.fontSize           = (11 + Math.random() * 13) + 'px';
     container.appendChild(el);
   }
 })();
 
 
 /* ============================================================
-   2. CUENTA REGRESIVA
+   3. CUENTA REGRESIVA DINÁMICA
 ============================================================ */
 (function initCountdown() {
   // ─── FECHA OBJETIVO ───────────────────────────────────────
-  // Formato ISO compatible con todos los navegadores móviles.
-  // Ajustá la fecha aquí si cambia el evento.
-  const TARGET_DATE = new Date('2026-06-20T17:00:00');
+  const TARGET = new Date('2026-06-20T17:00:00');
   // ──────────────────────────────────────────────────────────
 
   const daysEl    = document.getElementById('days');
   const hoursEl   = document.getElementById('hours');
   const minutesEl = document.getElementById('minutes');
   const secondsEl = document.getElementById('seconds');
-  const countdown = document.getElementById('countdown');
-  const partyMsg  = document.getElementById('party-msg');
+  const cdEl      = document.getElementById('countdown');
+  const partyEl   = document.getElementById('party-msg');
 
-  if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+  if (!daysEl) return;
 
-  /**
-   * Rellena un número con cero a la izquierda si es < 10.
-   * @param {number} n
-   * @returns {string}
-   */
-  function pad(n) {
-    return String(n).padStart(2, '0');
-  }
+  function pad(n) { return String(n).padStart(2, '0'); }
 
-  /**
-   * Aplica una animación "pop" al elemento cuando el valor cambia.
-   * @param {HTMLElement} el
-   */
   function pop(el) {
     el.classList.remove('pop');
-    // fuerza reflow para reiniciar la animación CSS
     void el.offsetWidth;
     el.classList.add('pop');
     setTimeout(() => el.classList.remove('pop'), 300);
   }
 
-  // Guardamos los valores anteriores para comparar
   let prev = { d: -1, h: -1, m: -1, s: -1 };
 
-  /**
-   * Actualiza el contador cada segundo.
-   */
-  function updateCountdown() {
-    const now  = new Date();
-    const diff = TARGET_DATE - now; // milisegundos restantes
+  function tick() {
+    const diff = TARGET - new Date();
 
     if (diff <= 0) {
-      // ¡Llegó el gran día!
-      countdown.hidden = true;
-      partyMsg.hidden  = false;
+      cdEl.hidden    = true;
+      partyEl.hidden = false;
       clearInterval(timer);
-      launchConfetti(); // ¡celebración!
+      launchConfetti();
       return;
     }
 
-    const d = Math.floor(diff / 1000 / 60 / 60 / 24);
-    const h = Math.floor((diff / 1000 / 60 / 60) % 24);
-    const m = Math.floor((diff / 1000 / 60) % 60);
-    const s = Math.floor((diff / 1000) % 60);
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000)  / 60000);
+    const s = Math.floor((diff % 60000)    / 1000);
 
-    // Actualiza texto + animación solo si el valor cambió
     if (d !== prev.d) { daysEl.textContent    = pad(d); pop(daysEl);    prev.d = d; }
     if (h !== prev.h) { hoursEl.textContent   = pad(h); pop(hoursEl);   prev.h = h; }
     if (m !== prev.m) { minutesEl.textContent = pad(m); pop(minutesEl); prev.m = m; }
     if (s !== prev.s) { secondsEl.textContent = pad(s); pop(secondsEl); prev.s = s; }
   }
 
-  // Corre de inmediato y luego cada segundo
-  updateCountdown();
-  const timer = setInterval(updateCountdown, 1000);
+  tick();
+  const timer = setInterval(tick, 1000);
 })();
 
 
 /* ============================================================
-   3. CONFETI KAWAII (solo cuando llega el gran día)
+   4. CONFETI (cuando llega el gran día)
 ============================================================ */
 function launchConfetti() {
-  const container = document.getElementById('particles-container');
-  if (!container) return;
-
-  const confettiSymbols = ['🎉', '🎊', '🎀', '💜', '⭐', '🌸', '🥳', '✨'];
-  const COUNT = 40;
-
-  for (let i = 0; i < COUNT; i++) {
+  const syms = ['🎉','🎊','🎀','💜','⭐','🌸','🥳','✨'];
+  for (let i = 0; i < 40; i++) {
     setTimeout(() => {
       const el = document.createElement('span');
-      el.style.cssText = `
-        position: fixed;
-        top: -30px;
-        left: ${Math.random() * 100}vw;
-        font-size: ${20 + Math.random() * 20}px;
-        animation: floatParticle ${3 + Math.random() * 4}s ease forwards;
-        pointer-events: none;
-        z-index: 9999;
-      `;
-      el.textContent = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
+      Object.assign(el.style, {
+        position:   'fixed',
+        top:        '-30px',
+        left:       Math.random() * 100 + 'vw',
+        fontSize:   (18 + Math.random() * 18) + 'px',
+        animation:  `floatP ${3 + Math.random() * 4}s ease forwards`,
+        pointerEvents: 'none',
+        zIndex:     '9999'
+      });
+      el.textContent = syms[Math.floor(Math.random() * syms.length)];
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 8000);
     }, i * 120);
@@ -157,85 +233,56 @@ function launchConfetti() {
 
 
 /* ============================================================
-   4. BOTÓN WHATSAPP
+   5. BOTÓN WHATSAPP
 ============================================================ */
 (function initWhatsApp() {
   const btn = document.getElementById('whatsapp-btn');
   if (!btn) return;
-
-  // Número sin caracteres especiales (solo dígitos, con código de país)
-  const PHONE   = '595986613236';
-  const MESSAGE = '¡Hola! Confirmo mi asistencia al cumpleaños de Luana Jazmín 🎉';
-
-  const encoded = encodeURIComponent(MESSAGE);
-  btn.href = `https://wa.me/${PHONE}?text=${encoded}`;
+  const phone   = '595986613236';
+  const message = '¡Hola! Confirmo mi asistencia al cumpleaños de Luana Jazmín 🎉';
+  btn.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 })();
 
 
 /* ============================================================
-   5. SCROLL REVEAL
+   6. EFECTO SPARKLE AL TOCAR / CLIC
 ============================================================ */
-(function initScrollReveal() {
-  // Agrega clase .reveal a todas las secciones
-  const sections = document.querySelectorAll(
-    '.countdown-section, .details-section, .rsvp-section, .site-footer'
-  );
+(function initSparkle() {
+  const symbols = ['✨','💜','🌸','⭐','💫','🩷','🎀'];
 
-  sections.forEach(el => el.classList.add('reveal'));
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); // solo una vez
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
-
-  sections.forEach(el => observer.observe(el));
-})();
-
-
-/* ============================================================
-   6. EFECTO SPARKLE AL TOCAR / HACER CLIC EN LA PANTALLA
-============================================================ */
-(function initSparkleClick() {
-  const symbols = ['✨', '💜', '🌸', '⭐', '💫', '🩷'];
-
-  function spawnSparkle(x, y) {
+  function spawn(x, y) {
     const el = document.createElement('span');
-    el.style.cssText = `
-      position: fixed;
-      left: ${x}px;
-      top:  ${y}px;
-      font-size: ${16 + Math.random() * 14}px;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      animation: sparkleOut 0.7s ease forwards;
-    `;
+    Object.assign(el.style, {
+      position:      'fixed',
+      left:          x + 'px',
+      top:           y + 'px',
+      fontSize:      (14 + Math.random() * 14) + 'px',
+      pointerEvents: 'none',
+      zIndex:        '9998',
+      transform:     'translate(-50%,-50%)',
+      animation:     'sparkleOut 0.7s ease forwards'
+    });
     el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 700);
   }
 
-  // Inyecta la animación sparkleOut dinámicamente
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes sparkleOut {
-      0%   { opacity: 1; transform: translate(-50%, -50%) scale(1);   }
-      100% { opacity: 0; transform: translate(-50%, -80%) scale(1.8); }
-    }
-  `;
-  document.head.appendChild(style);
+  // Inyecta animación sparkleOut si no existe
+  if (!document.getElementById('sparkle-style')) {
+    const s = document.createElement('style');
+    s.id = 'sparkle-style';
+    s.textContent = `
+      @keyframes sparkleOut {
+        0%   { opacity:1; transform:translate(-50%,-50%) scale(1);   }
+        100% { opacity:0; transform:translate(-50%,-80%) scale(1.8); }
+      }
+    `;
+    document.head.appendChild(s);
+  }
 
-  // Escucha clicks y toques
-  document.addEventListener('click', (e) => spawnSparkle(e.clientX, e.clientY));
-  document.addEventListener('touchstart', (e) => {
+  document.addEventListener('click', e => spawn(e.clientX, e.clientY));
+  document.addEventListener('touchstart', e => {
     const t = e.touches[0];
-    spawnSparkle(t.clientX, t.clientY);
+    spawn(t.clientX, t.clientY);
   }, { passive: true });
 })();
