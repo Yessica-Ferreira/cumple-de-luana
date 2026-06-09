@@ -359,14 +359,14 @@ function launchConfetti() {
 
         isPlaying = true;
         btn.classList.add('playing');
-        btn.textContent = '⏸️';
+        btn.textContent = '⏸️ Pausar Música';
         btn.setAttribute('aria-label', 'Pausar música');
       } else {
         audio.pause();
 
         isPlaying = false;
         btn.classList.remove('playing');
-        btn.textContent = '🎵';
+        btn.textContent = '🎵 Reproducir Música';
         btn.setAttribute('aria-label', 'Reproducir música');
       }
     } catch (error) {
