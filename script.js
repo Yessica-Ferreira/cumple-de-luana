@@ -1,10 +1,10 @@
 /**
- * script.js — Invitación Kawaii Gamer · Sistema de SLIDES
+ * script.js — Invitación Kawaii Gamer · Sistema de 3 SLIDES
  * Luana Jazmín 🎀 8 años
  */
 
 /* ============================================================
-   1. SISTEMA DE SLIDES
+   1. SISTEMA DE SLIDES AUTOMÁTICO
 ============================================================ */
 (function initSlider() {
   const slides = Array.from(document.querySelectorAll('.slide'));
@@ -18,9 +18,15 @@
   let current = 0;
   let isAnimating = false;
 
+  const AUTO_DELAY = 10000;
+  let autoTimer;
+
   function goTo(index) {
-    if (index === current || isAnimating) return;
-    if (index < 0 || index >= TOTAL) return;
+    if (isAnimating) return;
+
+    if (index >= TOTAL) index = 0;
+    if (index < 0) index = TOTAL - 1;
+    if (index === current) return;
 
     isAnimating = true;
 
@@ -52,8 +58,8 @@
   }
 
   function updateUI() {
-    btnPrev.disabled = current === 0;
-    btnNext.disabled = current === TOTAL - 1;
+    btnPrev.disabled = false;
+    btnNext.disabled = false;
 
     dots.forEach((dot, i) => {
       dot.classList.toggle('active', i === current);
@@ -65,6 +71,19 @@
     }
   }
 
+  function startAutoPlay() {
+    clearInterval(autoTimer);
+
+    autoTimer = setInterval(() => {
+      goTo(current + 1);
+    }, AUTO_DELAY);
+  }
+
+  function restartAutoPlay() {
+    clearInterval(autoTimer);
+    startAutoPlay();
+  }
+
   slides.forEach((slide, i) => {
     if (i === 0) {
       slide.classList.add('active');
@@ -72,21 +91,34 @@
   });
 
   updateUI();
+  startAutoPlay();
 
-  btnPrev.addEventListener('click', () => goTo(current - 1));
-  btnNext.addEventListener('click', () => goTo(current + 1));
+  btnPrev.addEventListener('click', () => {
+    goTo(current - 1);
+    restartAutoPlay();
+  });
+
+  btnNext.addEventListener('click', () => {
+    goTo(current + 1);
+    restartAutoPlay();
+  });
 
   dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => goTo(i));
+    dot.addEventListener('click', () => {
+      goTo(i);
+      restartAutoPlay();
+    });
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       goTo(current + 1);
+      restartAutoPlay();
     }
 
     if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
       goTo(current - 1);
+      restartAutoPlay();
     }
   });
 
@@ -108,6 +140,8 @@
       } else {
         goTo(current - 1);
       }
+
+      restartAutoPlay();
     }
   }, { passive: true });
 })();
@@ -149,7 +183,7 @@
    3. CUENTA REGRESIVA DINÁMICA
 ============================================================ */
 (function initCountdown() {
-  const TARGET = new Date('2026-06-20T17:00:00');
+  const TARGET = new Date('2026-06-20T16:00:00');
 
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
@@ -278,7 +312,7 @@ function launchConfetti() {
 })();
 
 /* ============================================================
-   6. EFECTO SPARKLE AL TOCAR / CLIC
+   6. EFECTO SPARKLE
 ============================================================ */
 (function initSparkle() {
   const symbols = ['✨', '💜', '🌸', '⭐', '💫', '🩷', '🎀'];
@@ -334,13 +368,12 @@ function launchConfetti() {
 
   document.addEventListener('touchstart', (e) => {
     const touch = e.touches[0];
-
     spawn(touch.clientX, touch.clientY);
   }, { passive: true });
 })();
 
 /* ============================================================
-   7. MÚSICA DE FONDO
+   7. MÚSICA DE FONDO CON DURACIÓN
 ============================================================ */
 (function initMusic() {
   const audio = document.getElementById('musica-fondo');
@@ -349,8 +382,23 @@ function launchConfetti() {
   if (!audio || !btn) return;
 
   let isPlaying = false;
+  let musicTimer;
 
   audio.volume = 0.45;
+
+  const DURACION_MUSICA = 60;
+
+  function detenerMusica() {
+    audio.pause();
+    audio.currentTime = 0;
+
+    isPlaying = false;
+    btn.classList.remove('playing');
+    btn.textContent = '🎵 Reproducir Música';
+    btn.setAttribute('aria-label', 'Reproducir música');
+
+    clearTimeout(musicTimer);
+  }
 
   btn.addEventListener('click', async () => {
     try {
@@ -361,13 +409,15 @@ function launchConfetti() {
         btn.classList.add('playing');
         btn.textContent = '⏸️ Pausar Música';
         btn.setAttribute('aria-label', 'Pausar música');
-      } else {
-        audio.pause();
 
-        isPlaying = false;
-        btn.classList.remove('playing');
-        btn.textContent = '🎵 Reproducir Música';
-        btn.setAttribute('aria-label', 'Reproducir música');
+        clearTimeout(musicTimer);
+
+        musicTimer = setTimeout(() => {
+          detenerMusica();
+        }, DURACION_MUSICA * 1000);
+
+      } else {
+        detenerMusica();
       }
     } catch (error) {
       console.log('El navegador bloqueó la reproducción automática:', error);
