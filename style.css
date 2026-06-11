@@ -160,7 +160,7 @@ body {
 }
 
 /* ============================================================
-   PORTADA TIPO PLANTILLA — IMÁGENES ADELANTE
+   PORTADA TIPO PLANTILLA — ARREGLADA
 ============================================================ */
 
 .cover-card--poster {
@@ -240,12 +240,12 @@ body {
   position: relative;
   z-index: 20;
 
-  width: 64%;
-  min-height: 40%;
+  width: 66%;
+  min-height: 42%;
 
-  margin-top: 88px;
+  margin-top: 118px;
 
-  padding: 22px 12px 20px;
+  padding: 62px 12px 22px;
 
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
@@ -333,57 +333,25 @@ body {
 
 /* Imágenes y emojis */
 .poster-img,
-.poster-emoji,
-.poster-number {
+.poster-emoji {
   position: absolute;
   pointer-events: none;
   filter: drop-shadow(0 8px 12px rgba(124, 58, 237, 0.22));
 }
 
-/* Personaje de arriba: adelante y grande */
+/* Personaje de arriba */
 .poster-top-character {
-  top: 8px;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
 
-  width: clamp(145px, 35vw, 205px);
+  width: clamp(135px, 32vw, 190px);
   z-index: 45;
 
   animation: posterTopFloat 4s ease-in-out infinite;
 }
 
-/* Número 8 adelante */
-.poster-number {
-  right: -10px;
-  top: 42%;
-
-  width: clamp(95px, 24vw, 130px);
-  height: clamp(95px, 24vw, 130px);
-
-  border-radius: 50%;
-
-  background: linear-gradient(180deg, #ff9bc9, #ff6ead);
-  color: white;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-family: var(--font-title);
-  font-size: clamp(4.8rem, 17vw, 7rem);
-
-  border: 5px solid white;
-  text-shadow:
-    3px 3px 0 rgba(155, 89, 182, 0.45),
-    0 5px 14px rgba(0, 0, 0, 0.12);
-
-  box-shadow: 0 10px 24px rgba(255, 119, 168, 0.28);
-  z-index: 48;
-
-  animation: numberPop 3s ease-in-out infinite;
-}
-
-/* Lyna abajo izquierda adelante */
+/* Lyna abajo izquierda */
 .poster-lyna-left {
   left: -10px;
   bottom: 85px;
@@ -394,18 +362,18 @@ body {
   animation: stickerFloat 4s ease-in-out infinite;
 }
 
-/* Amigos abajo derecha adelante */
+/* Lyna con amigo, un poquito encima del marco */
 .poster-friends {
-  right: 18px;
-  bottom: 35px;
+  right: 7px;
+  bottom: 105px;
 
-  width: clamp(110px, 29vw, 160px);
-  z-index: 47;
+  width: clamp(112px, 29vw, 165px);
+  z-index: 48;
 
   animation: stickerFloat 4.4s ease-in-out infinite;
 }
 
-/* Patito adelante */
+/* Patito */
 .poster-duck {
   width: clamp(65px, 16vw, 90px);
   left: 12px;
@@ -439,7 +407,7 @@ body {
   animation: stickerFloat 4.5s ease-in-out infinite;
 }
 
-/* Emojis decorativos adelante */
+/* Emojis decorativos */
 .poster-emoji {
   font-size: clamp(1.5rem, 5vw, 2.7rem);
   z-index: 44;
@@ -513,17 +481,6 @@ body {
 
   50% {
     transform: scale(1.12) rotate(7deg);
-  }
-}
-
-@keyframes numberPop {
-  0%,
-  100% {
-    transform: scale(1) rotate(3deg);
-  }
-
-  50% {
-    transform: scale(1.06) rotate(-2deg);
   }
 }
 
@@ -1124,25 +1081,17 @@ body {
   }
 
   .poster-frame {
-    width: 62%;
-    min-height: 39%;
-    margin-top: 90px;
-    padding: 20px 9px 18px;
+    width: 64%;
+    min-height: 42%;
+    margin-top: 118px;
+    padding: 64px 10px 18px;
     border-radius: 28px;
     outline-offset: -8px;
   }
 
   .poster-top-character {
-    width: 155px;
-    top: 6px;
-  }
-
-  .poster-number {
-    right: -9px;
-    top: 43%;
-    width: 98px;
-    height: 98px;
-    font-size: 5.4rem;
+    width: 138px;
+    top: 10px;
   }
 
   .poster-lyna-left {
@@ -1152,9 +1101,9 @@ body {
   }
 
   .poster-friends {
-    width: 118px;
-    right: 8px;
-    bottom: 40px;
+    width: 116px;
+    right: 4px;
+    bottom: 112px;
   }
 
   .poster-duck {
@@ -1197,25 +1146,25 @@ body {
   }
 
   .poster-frame .hero__subtitle {
-    font-size: 0.54rem;
-    letter-spacing: 1px;
+    font-size: 0.52rem;
+    letter-spacing: 0.9px;
   }
 
   .poster-frame .hero__title {
-    font-size: clamp(1.7rem, 8.5vw, 2.8rem);
+    font-size: clamp(1.65rem, 8.2vw, 2.65rem);
   }
 
   .poster-frame .hero__name {
-    font-size: clamp(1.15rem, 5.8vw, 1.7rem);
+    font-size: clamp(1.1rem, 5.8vw, 1.65rem);
   }
 
   .poster-frame .hero__welcome {
-    font-size: 0.64rem;
+    font-size: 0.62rem;
   }
 
   .poster-frame .hero-tags span {
     padding: 4px 7px;
-    font-size: 0.58rem;
+    font-size: 0.56rem;
   }
 
   .info-content {
@@ -1292,25 +1241,19 @@ body {
   }
 
   .poster-top-character {
-    width: 118px;
+    width: 112px;
     top: 4px;
   }
 
   .poster-frame {
-    margin-top: 72px;
+    margin-top: 90px;
     min-height: 39%;
-    padding: 14px 8px;
+    padding: 52px 8px 14px;
   }
 
   .poster-frame .hero__welcome,
   .poster-frame .hero-tags {
     display: none;
-  }
-
-  .poster-number {
-    width: 78px;
-    height: 78px;
-    font-size: 4.2rem;
   }
 
   .poster-lyna-left {
@@ -1319,8 +1262,8 @@ body {
   }
 
   .poster-friends {
-    width: 90px;
-    bottom: 34px;
+    width: 88px;
+    bottom: 82px;
   }
 
   .poster-duck {
